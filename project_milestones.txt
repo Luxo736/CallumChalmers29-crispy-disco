@@ -1,12 +1,12 @@
 Milestones
 
-22/9/16 -20%
+22/9/16 -25%
 -Write documentation for programme requirements
 -Write working function SNP search function for one file
 -Write one test for SNP search function
-
-29/9/16 -20%
 -Convert iPython Notebook to Python script
+
+29/9/16 -15%
 -Discuss and write tests for other functions
 -Draft introduction for report
 -Update documentation for programme implementation
