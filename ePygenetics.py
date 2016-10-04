@@ -4,6 +4,7 @@
 import sys
 import os
 import glob
+import csv
 from itertools import islice
 from colorama import Fore, Style
 
@@ -13,7 +14,7 @@ def clear_screen(): #clears the screen for aesthetics
 def check_database_existance(): #checks if the output database is already present and if not, creates it
     if not os.path.exists("ePygenetics.csv"): #checking for database
         database = open("ePygenetics.csv", "w") #creating database
-        database.write("snps,") #adding column label to new database
+        database.write("snps" + '\n') #adding column label to new database
         database.close()
 
 def check_user_input(expected_inputs, user_input): #takes user input and compares it to a #set of expected inputs to ensure the programme runs correctly
@@ -39,12 +40,13 @@ def consume(iterator, n): #Advance the iterator n-steps ahead, downloaded from s
 def welcome_to_ePygenetics(): #welcome function that prints the menu of the programme
     clear_screen()
     print("Welcome to ePygenetics")
-    print("1. Add a SNP")
-    print("2. Exit")
+    print("1. Add a cell line (load a file)")
+    print("2. Add a SNP")
+    print("3. Help")
+    print("4. Exit")
     print() #for aesthetics
-""" print("2. Add a cell line")
-    print("3. Check the database")
-    print("4. Help")
+
+""" print("3. Check the database")
  
     print() #blank line for aesthetics """
 
@@ -52,27 +54,24 @@ def get_user_input_welcome(): #function which asks the user which menu option th
     user_input = input("What would like to do?: ")
     print() #blank line for aesthetics
     user_input = user_input.strip()
-    expected_inputs = ["1","2"] #expected inputs from the welcome function
+    expected_inputs = ["1","2","3","4"] #expected inputs from the welcome function
     proceed = check_user_input(expected_inputs, user_input)
     proceed_with_chosen_path(proceed)
 
 def proceed_with_chosen_path(user_input): #directs the user to the relevant function based on their input
-    if user_input == "1":
+    if user_input == "2": #allows user to add a snp
         add_a_snp()    
     elif user_input == 0: #allows user to reinput a valid character
         clear_screen()
         print(Fore.RED + "Invalid character entered") #prints in red
         print(Style.RESET_ALL) #back to white
         get_user_input_welcome()
+    elif user_input == "1": #allows user to add a cell line
+        add_a_cell_line()
+    elif user_input == "3": #runs help
+        run_help()
     else: #exits the programme
         quit()
-
-""" elif user_input == "2":
-        add_a_cell_line()
-    elif user_input == "3":
-        check_database()
-    elif user_input == "4":
-        run_help() """
  
 
 def add_a_snp():
@@ -105,11 +104,11 @@ def check_snp_in_database(chromosome, snp): #function which checks that SNP is n
     finder = 0
     with open("ePygenetics.csv", "r") as f:
         for line in f: #goes through the file line by line
-            finder = line.find("chr" + chromosome + "-" + snp + "*") #looks for snp in each line
+            finder = line.find("chr" + chromosome + "-" + snp + "*" + ",") #looks for snp in each line
             if finder != -1: #if snp is found
                 duplicate_snp() #notifies the user the snp is already in the database
         if finder == -1: #if the SNP is not present
-            add_snp_database("chr" + chromosome + "-" + snp + "*") #adds the snp to the database
+            add_snp_database("chr" + chromosome + "-" + snp + "*" + "," + '\n') #adds the snp to the database
 	
 def duplicate_snp(): #tells the user they entered a SNP already in the database
     clear_screen()
@@ -117,7 +116,7 @@ def duplicate_snp(): #tells the user they entered a SNP already in the database
     print(Style.RESET_ALL) #resets to white
     print() #blank line for aesthetics
     user_input = input("Would like to add a different SNP?, enter 1 for yes, 2 to return to the main menu or 3 to exit the programme: ") #gets user input
-    user_input.strip()
+    user_input = user_input.strip()
     expected_inputs = ["1","2","3"] #expected inputs
     proceed = check_user_input(expected_inputs, user_input)
     proceed_with_chosen_path2(proceed)
@@ -134,7 +133,7 @@ def proceed_with_chosen_path2(user_input):
 
 def add_snp_database(snp_code): #adds snp to database
     database = open("ePygenetics.csv", "a")
-    database.write(snp_code + ",") #adds new row to the database with the snp code as the label
+    database.write(snp_code) #adds new row to the database with the snp code as the label
     database.close()
 
 def update_snp_database(chromosome, snp): #updates the database for the snp that was added
@@ -142,6 +141,7 @@ def update_snp_database(chromosome, snp): #updates the database for the snp that
     file_list = generate_cell_line_file_list(cell_line_list) #makes sure the cell line files are opened in the right order
     for file in file_list: #for the cell line files
         append_snp(chromosome, snp, file) #look for the SNP contig value and add it to the database
+    snp_added() #passes the user to a function which asks how they want to proceed
 
 def generate_cell_line_list(): #makes a list of all the cell lines that are in the database
     database = open("ePygenetics.csv", "r")
@@ -151,10 +151,7 @@ def generate_cell_line_list(): #makes a list of all the cell lines that are in t
     cell_line_list = cell_line_list.split(",") #splits into list of cell lines
     cell_line_list.pop(0) #removes snp column label
     database.close()
-    if len(cell_line_list) == 0: #checks that a cell line has been added and if not, prompts the user to add a cell line
-        no_cell_lines_added() #prompts user to add a cell line
-    else:
-        return cell_line_list
+    return cell_line_list
 
 def generate_cell_line_file_list(cell_line_list):#makes sure the cell line files required are opened in the right order 
     file_list = glob.glob('*.wig') #selects all the wig files in the current working directory
@@ -162,53 +159,50 @@ def generate_cell_line_file_list(cell_line_list):#makes sure the cell line files
     for element in file_list:
         end_of_cell_line = element.find("-") #finds the dash in the file
         cell_line = element[:end_of_cell_line] #slices till the dash which is the cell line name
-        if cell_line in cell_line_list: #uses cell line name to determine if cell line is loaded in the database
-            sorted_cell_line_file_list += [element] #adds the cell lines in order
+        order = cell_line_list.index(cell_line) if cell_line in cell_line_list else None#uses cell line name to determine if cell line is loaded in the database
+        if order == None:
+            pass
+        elif order > len(sorted_cell_line_file_list):
+            sorted_cell_line_file_list.append(element)
+        else:
+            sorted_cell_line_file_list.insert(order, element)
     return sorted_cell_line_file_list
-
-def no_cell_lines_added(): #prompts the user to add a cell line because none have been loaded
-    clear_screen()
-    print(Fore.RED + "No cell lines added")  #prints in red to get user attention
-    print(Style.RESET_ALL) #resets to white
-    print()
-    print("Please move a .wig file into the current working directory in the format [cell line]-*.wig")
-    print()
-    input("Once this is complete press enter to continue")
-    print()
-    print("Function currently unavailable") #coming soon
-    quit()
-#    add_cell_line() #passes the user to the the add cell line function
 
 def append_snp(chromosome, snp, file):
     contigs = find_snp(chromosome, snp, file) #searchs the file for the right value
-    database = open("ePygenetics.csv", "a")
-    database.write(contigs + "," + "\n") #adds value to the row
+    input_database = open("ePygenetics.csv", "r")
+    data = input_database.read()
+    data = data.split('\n')
+    for element in data:
+        data += '\n'
+    end = element.find("\n")
+    element = element[:end]
+    element += (contigs + ',')
     database.close()
-    snp_added() #passes the user to a function which asks how they want to proceed
+    output_database = open("ePygenetics.csv", "r")
+    output_database.writelines(data)
+    output_database.close()
 
-
-def find_snp(chromosome, snp, file):#finds the SNP within the wig file and returns the contigs value
-    count = 0
+def find_snp(chromosome, snp, file):#"""finds the SNP within the wig file and returns the contigs value"""
     snp_position = int(snp)
     snp_position_rounded = ((snp_position // 1000) * 1000) + 1 #works out what block the data is in
     snp_position_rounded = "start=" + str(snp_position_rounded) + " "
+    chromosome_string = "chrom=chr" + chromosome + " "
     iterations = ((snp_position % 1000) // 20) #works out what line the correct value is on
     if iterations == 0: #ensures that multiples of 1000 are found on the right line
         iterations = 50
     chromosome_pos = -1 #initialises variable
     snp_pos = -1 #initialises variable
     with open(file) as f: 
-        next(f)
+        next(f) #skips first line
         for line in f: #goes through the file line by line
-            chromosome_pos = line.find(chromosome) #finds right block
+            chromosome_pos = line.find(chromosome_string) #finds right block
             snp_pos = line.find(snp_position_rounded) #finds right block
             if chromosome_pos != -1 and snp_pos != -1: #in right block
                 consume(f, (iterations-1)) #move to right line
                 return next(f).strip() #return it
             consume(f, 50) #skip to next block
         return "NaN" #if not in then return Not a number
-
-
 
 def snp_added(): #asks user what they want to do next
     print()
@@ -217,7 +211,7 @@ def snp_added(): #asks user what they want to do next
     print("What do you want to do next?")
     print()
     user_input = input("Enter 1 to add another SNP, 2 to return to main menu or 3 to exit: ")
-    user_input.strip()
+    user_input = user_input.strip()
     expected_inputs = ["1", "2", "3"]
     proceed = check_user_input(expected_inputs, user_input) #checks user input is as expected
     proceed_with_chosen_path3(proceed)
@@ -232,12 +226,155 @@ def proceed_with_chosen_path3(user_input):
         print(Style.RESET_ALL) #reset to white
         snp_added() #allows user to enter a valid input
     else:
-        quit()		
-		
+        quit()	
+
+def add_a_cell_line(): #allows user to load a file into the programme
+    clear_screen() #clears screens for aesthetics
+    check_database_existance() #checks if there is already a database
+    cell_line = get_cell_line() #gets user input for the cell line
+    check_cell_line(cell_line)
+    add_cell_line_database(cell_line) #adds a new column to the database for that cell line
+    cell_line_added() #asks the user what they would like to do next
+    
+def get_cell_line(): #asks user to input the name of the cell line they want to add
+    print("Enter the cell line name (the characters before the '-' in the file name) or 0 to return to the main menu")
+    print() #blank line for aesthetics
+    cell_line = input("Enter cell line name: ") #gets user input
+    cell_line = cell_line.strip() #cleans input
+    if cell_line == "0": #allows user to return if they got here by accident
+        return_to_menu()
+    else:
+        return cell_line #returns input
+
+def check_cell_line(cell_line):
+    database = open("ePygenetics.csv", "r")
+    cell_line_list = database.readline() #reads top row
+    end = cell_line_list.find("\n")
+    cell_line_list = cell_line_list[:end]
+    cell_line_list = cell_line_list.split(",") #splits into list of cell lines
+    cell_line_list.pop(0) #removes snp column label
+    database.close()
+    file_list = glob.glob('*.wig')
+    cell_line_file_list = []
+    for element in file_list:
+        end_of_cell_line = element.find("-") #finds the dash in the file
+        cell_line_file = element[:end_of_cell_line] #slices till the dash which is the cell line name
+        cell_line_file_list.append(cell_line_file)
+    if cell_line not in cell_line_file_list:
+        cell_line_not_added()
+    elif cell_line in cell_line_list:
+        duplicate_cell_line()
+
+
+def cell_line_not_added():
+    clear_screen()
+    print(Fore.RED + "Cell line file not in folder")  #prints in red to get user attention
+    print(Style.RESET_ALL) #resets to white
+    print()
+    print("Please move the .wig file corresponding to the cell line you wish to add into the current working directory in the format [cell line]-*.wig")
+    print()
+    input("Once this is complete press enter to continue")
+    add_a_cell_line()
+
+def duplicate_cell_line(): #tells the user they entered a cell line already in the database
+    clear_screen()
+    print(Fore.RED + "Cell line already entered")  #prints in red to get user attention
+    print(Style.RESET_ALL) #resets to white
+    print() #blank line for aesthetics
+    user_input = input("Would like to add a different cell line?, enter 1 for yes, 2 to return to the main menu or 3 to exit the programme: ") #gets user input
+    user_input = user_input.strip()
+    expected_inputs = ["1","2","3"] #expected inputs
+    proceed = check_user_input(expected_inputs, user_input)
+    proceed_with_chosen_path4(proceed)
+    
+def proceed_with_chosen_path4(user_input):
+    if user_input == "1": #allows user to enter another snp
+        add_a_cell_line()
+    elif user_input == "2": #allows user to return to menu
+        return_to_menu()
+    elif user_input == 0:
+        print(Fore.RED + "Invalid character added")  #prints in red to get user attention
+        print(Style.RESET_ALL) #reset to white
+        snp_added() #allows user to enter a valid input
+    else:
+        quit()	
+
+def add_cell_line_database(cell_line): #adds cell line to database
+    input_database = open('ePygenetics.csv', 'r') #opens database
+    data = input_database.read() #stores database
+    data = data.split('\n')
+    for num in range(len(data)):
+        if data[num] == "":
+            data.pop(num)
+    columns_list = data[0] #stores first line
+    columns_list += (',' + cell_line) #adds cell line from user input to first line
+    data[0] = columns_list #replaces first line
+    filename = [cell_line]
+    full_filename = generate_cell_line_file_list(filename)
+    full_filename = full_filename[0]
+    for num in range(1, len(data)):
+        line = data[num]
+        line = '\n' + line
+        split = line.find("-")
+        split1 = line.find("*")
+        chromosome = line[4:split]
+        snp = line[split+1:split1]
+        contigs = find_snp(chromosome, snp, full_filename)
+        line += (contigs + ",")  
+        if num == len(data):
+            end = line.find("\n")
+            line = line[:end]
+        data[num] = line 
+    input_database.close()
+    output_database = open('ePygenetics.csv', 'w')
+    output_database.writelines(data) #writes to database
+    output_database.close() 
+
+def cell_line_added(): #asks user what they want to do next
+    print()
+    print("Cell line added")
+    print()
+    print("What do you want to do next?")
+    print()
+    user_input = input("Enter 1 to add another cell line, 2 to return to main menu or 3 to exit: ")
+    user_input = user_input.strip()
+    expected_inputs = ["1", "2", "3"]
+    proceed = check_user_input(expected_inputs, user_input) #checks user input is as expected
+    proceed_with_chosen_path4(proceed)
+
+def proceed_with_chosen_path4(user_input):
+    if user_input == "1": #allows user to enter another cell line
+        add_a_cell_line()
+    elif user_input == "2": #allows user to return to menu
+        return_to_menu()
+    elif user_input == 0:
+        print(Fore.RED + "Invalid character added")  #prints in red to get user attention
+        print(Style.RESET_ALL) #reset to white
+        cell_line_added() #allows user to enter a valid input
+    else:
+        quit()  
+    
+def run_help():
+    clear_screen() #for aesthetics
+    print()
+    print("1. Add a SNP") #help statements
+    print()
+    print("This function allows you to add a SNP to the database so that its status can be analysed in all the currently loaded cell lines")
+    print()
+    print("2. Add a cell line")
+    print()
+    print("This function allows you add a cell line to the database so that the status of all its SNPs can be analysed")
+    print()
+#    print("3. Check the database")
+#    print()
+#    print("This function allows you to view data that has already been loaded")
+#    print()
+    input("Press enter to continue")
+    print()
+    return_to_menu()	
+	
+
 def main():
     welcome_to_ePygenetics()
     get_user_input_welcome()
-
-main()
-
 

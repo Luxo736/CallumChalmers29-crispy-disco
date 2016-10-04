@@ -34,7 +34,7 @@ Create a python database that integrates DNAse hypersensitivity data with SNP da
 
 - Callum Chalmers - Product Owner/Development Team (Email:ccha939@aucklanduni.ac.nz)
 - Justin O'Sullivan - Product Owner (Email:justin.osullivan@auckland.ac.nz)
-- Tanya Gray - Scrum Master
+- Kreshnik Pireva - Scrum Master (Email:kpir004@aucklanduni.ac.nz)
 - Luis Escalante Tito - Development Team
 - Ahmed Adam - Development Team
 - Kieren Deane-Alder - Development Team
