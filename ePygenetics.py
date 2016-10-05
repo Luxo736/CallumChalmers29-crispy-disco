@@ -1,4 +1,5 @@
 """
+This programme is called ePygenetics. It was designed and built by Callum Chalmers with assistance from Kreshnik Pireva. This code is for extracting the epigenetic status of SNPs from wiggle files and storing the data in a database. For more information see the documentation in the README.md file.
 """
 
 import sys
@@ -93,7 +94,7 @@ def get_snp(): #function which gets the SNP data from the user and returns a tup
         input(Fore.RED + "Invalid chromosome entered, only numbers 1-23 are valid, press enter to continue: ") #makes sure user enters a valid chromosome, message in red
         print(Style.RESET_ALL) #resets to white
         add_a_snp()
-    snp = input("Enter SNP position: ")
+    snp = input("Enter SNP position: ") #gets user input for SNP position
     snp = snp.strip()
     if snp == "0": #allows user to return if they got here by accident
         return_to_menu()
@@ -160,13 +161,12 @@ def generate_cell_line_file_list(cell_line_list):#makes sure the cell line files
         end_of_cell_line = element.find("-") #finds the dash in the file
         cell_line = element[:end_of_cell_line] #slices till the dash which is the cell line name
         order = cell_line_list.index(cell_line) if cell_line in cell_line_list else None#uses cell line name to determine if cell line is loaded in the database
-        if order == None:
-            pass
-        elif order > len(sorted_cell_line_file_list):
-            sorted_cell_line_file_list.append(element)
-        else:
-            sorted_cell_line_file_list.insert(order, element)
-    return sorted_cell_line_file_list
+        if order == None: #If the cell line is not loaded in the database
+            pass #do nothing
+        elif order > len(sorted_cell_line_file_list): #If the cell line is in a column greater than the length of the list
+            sorted_cell_line_file_list.append(element) #Add it to the list
+        else: #If the cell line is in a column less than the length of the list
+            sorted_cell_line_file_list.insert(order, element) #Add it in the right position
 
 def append_snp(chromosome, snp, file):
     contigs = find_snp(chromosome, snp, file) #searchs the file for the right value
