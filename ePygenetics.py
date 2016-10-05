@@ -88,7 +88,7 @@ def get_snp(): #function which gets the SNP data from the user and returns a tup
     chromosome = chromosome.strip()
     if chromosome == "0": #allows user to return if they got here by accident
         return_to_menu()
-    chromosome = check_user_input(["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23"], chromosome) #ensures chromosome entry is valid
+    chromosome = check_user_input(["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","M", "Y"], chromosome) #ensures chromosome entry is valid
     if chromosome == 0:
         input(Fore.RED + "Invalid chromosome entered, only numbers 1-23 are valid, press enter to continue: ") #makes sure user enters a valid chromosome, message in red
         print(Style.RESET_ALL) #resets to white
@@ -186,11 +186,15 @@ def append_snp(chromosome, snp, file):
 def find_snp(chromosome, snp, file):#"""finds the SNP within the wig file and returns the contigs value"""
     snp_position = int(snp)
     snp_position_rounded = ((snp_position // 1000) * 1000) + 1 #works out what block the data is in
+    if ((snp_position % 1000) == 0): #ensures that multiples of 1000 are found on the right line
+        snp_position_rounded = snp_position - 999
     snp_position_rounded = "start=" + str(snp_position_rounded) + " "
     chromosome_string = "chrom=chr" + chromosome + " "
     iterations = ((snp_position % 1000) // 20) #works out what line the correct value is on
-    if iterations == 0: #ensures that multiples of 1000 are found on the right line
-        iterations = 50
+    if (snp_position % 20) != 0:
+        iterations += 1
+    if ((snp_position % 1000) == 0):
+        iterations = 49
     chromosome_pos = -1 #initialises variable
     snp_pos = -1 #initialises variable
     with open(file) as f: 
@@ -198,10 +202,15 @@ def find_snp(chromosome, snp, file):#"""finds the SNP within the wig file and re
         for line in f: #goes through the file line by line
             chromosome_pos = line.find(chromosome_string) #finds right block
             snp_pos = line.find(snp_position_rounded) #finds right block
-            if chromosome_pos != -1 and snp_pos != -1: #in right block
+            if chromosome_pos != -1 and snp_pos != -1: #in right block   
                 consume(f, (iterations-1)) #move to right line
-                return next(f).strip() #return it
-            consume(f, 50) #skip to next block
+                return next(f).strip() #return i
+            if line[0] == "f":
+                consume(f, 50)
+            else:
+                consume(f, 1)
+  
+                 #skip to next block
         return "NaN" #if not in then return Not a number
 
 def snp_added(): #asks user what they want to do next
@@ -307,24 +316,28 @@ def add_cell_line_database(cell_line): #adds cell line to database
         if data[num] == "":
             data.pop(num)
     columns_list = data[0] #stores first line
-    columns_list += (',' + cell_line) #adds cell line from user input to first line
+    columns_list += (',' + cell_line + '\n') #adds cell line from user input to first line
     data[0] = columns_list #replaces first line
     filename = [cell_line]
     full_filename = generate_cell_line_file_list(filename)
+    print(full_filename)
     full_filename = full_filename[0]
+    print(full_filename)
     for num in range(1, len(data)):
         line = data[num]
-        line = '\n' + line
+        print(line)
         split = line.find("-")
         split1 = line.find("*")
-        chromosome = line[4:split]
+        chromosome = line[3:split]
         snp = line[split+1:split1]
+        print(chromosome)
+        print(snp)
         contigs = find_snp(chromosome, snp, full_filename)
         line += (contigs + ",")  
         if num == len(data):
             end = line.find("\n")
             line = line[:end]
-        data[num] = line 
+        data[num] = line + '\n'
     input_database.close()
     output_database = open('ePygenetics.csv', 'w')
     output_database.writelines(data) #writes to database
@@ -377,4 +390,5 @@ def run_help():
 def main():
     welcome_to_ePygenetics()
     get_user_input_welcome()
+
 
