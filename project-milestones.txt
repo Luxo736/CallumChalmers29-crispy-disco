@@ -1,0 +1,29 @@
+Milestones
+
+22/9/16 -25%
+-Write documentation for programme requirements
+-Write working function SNP search function for one file
+-Write one test for SNP search function
+-Convert iPython Notebook to Python script
+
+29/9/16 -15%
+-Discuss and write tests for other functions
+-Draft introduction for report
+-Update documentation for programme implementation
+
+6/10/16 -25%
+-Update SNP search function so that it works for many files
+-Write at least one test for the above function
+-Update documentation to include multiple file SNP searches
+-Draft availability section for report
+
+13/10/16 -15%
+-Draft Implementation and Architecture and Quality control for final report
+
+20/10/16 -10%
+-Finish draft report
+-Finish documentation
+-Finish tests
+
+27/10/16 -10%
+-Submit final report and project
