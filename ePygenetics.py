@@ -1,5 +1,8 @@
 """
-This programme is called ePygenetics. It was designed and built by Callum Chalmers with assistance from Kreshnik Pireva. This code is for extracting the epigenetic status of SNPs from wiggle files and storing the data in a database. For more information see the documentation in the README.md file. The license for this programme is Attribution-ShareAlike 3.0 New Zealand.
+This programme is called ePygenetics. It was designed and built by Callum Chalmers with assistance from Kreshnik Pireva. This code is for extracting the epigenetic status of SNPs from wiggle files and storing the data in a database. For more information on the programme see the documentation in the README.md file. This programme is licensed under the MIT license. For more information on licensing see the LICENSE.md file.
+
+Copyright (c) 2016 Callum Chalmers
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 """
 
 import sys #import statements
