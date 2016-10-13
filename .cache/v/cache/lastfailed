@@ -1,0 +1,7 @@
+{
+  "test_ePygenetics/test_ePygenetics.py::test_find_snp_in_database": true,
+  "test_ePygenetics/test_ePygenetics.py::test_find_snp_in_database1": true,
+  "test_ePygenetics/test_ePygenetics.py::test_find_snp_not_in_database": true,
+  "test_ePygenetics/test_ePygenetics.py::test_find_snp_not_in_database1": true,
+  "test_ePygenetics/test_ePygenetics.py::test_generate_cell_line_file_list": true
+}
