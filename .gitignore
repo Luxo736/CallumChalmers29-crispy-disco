@@ -1,0 +1,6 @@
+*.cache
+~lock.*
+/__pycache__
+
+*.pyc
+*.csv

@@ -16,7 +16,9 @@ The above text was sourced from opensource.org/licenses/MIT
 
 For more information on the MIT license see [this link](https://tldrlegal.com/license/mit-license)
 
-Data in the test-data folder was obtained from an [open access repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) and is past its embargo data so can be reused without restriction.
+Data in the test-data folder was obtained from an [open access repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) and is past its embargo data so can be reused without restriction. 
+
+For more information on CC-0 see [this link](https://creativecommons.org/publicdomain/zero/1.0/)
 
 All other files are under the Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0). Under the terms of this license you are free to copy and redistribute the material in any medium of format and build on the material for any purpose even commerical but you must give appropriate credit, provide a link to the license and indicate what changes were made, you cannot in any way suggest that the licensor endorses you or your use. If you do adapt the code you must distribute it under the same license.
 

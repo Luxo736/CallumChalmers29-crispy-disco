@@ -10,7 +10,7 @@ The project was designed by Dr Justin O'Sullivan from the Liggins Institute who 
 
 In simple terms, this programme allows scientists to get extra information about person to person genetic variation. This information can then be used to better understand how genetics is related to disease and to look for treatments for diseases with a genetic component.
 
-The programme was designed using data from the [NIH Roadmap Epigenomics Repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) which is open access. A subset of 5 files has been included in the sample data folder for testing the programme.
+The programme was designed using data from the [NIH Roadmap Epigenomics Repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) which is open access. A subset of 5 modified files has been included in the ```test-data``` folder for testing the programme.
 
 ##Prerequisites:
 1. **Python**
@@ -47,9 +47,10 @@ You will then be asked to choose which of the 4 options you would like to do.
 
 ###Adding a cell line:
  - You will be asked to enter the name of a cell line to add to the database or 0 to return to the menu
+ - If the output database ```ePygenetics.csv``` does not exist, it will be created as part of this process
  - This refers to loading a file into the database 
  - For this action to work the corresponding file must be in the same directory as the python script
- - The file must be named ``[``cell line``]``-``[``any text``]`` and it must be a .wig file
+ - The file must be named [cell line]-[any text] and it must be a .wig file
  - If you enter a cell line that does not have a corresponding file in the directory an error message will pop up thats asks you to move the file into the directory and then press enter
  - If you enter a cell line that is already in the database, an error message will pop up asking you how you would like to proceed (see below)
  - If you enter 0 you will returned to the menu
@@ -60,11 +61,12 @@ You will then be asked to choose which of the 4 options you would like to do.
  - If you press 3, the programme will exit
 
 ###Adding a SNP:
- - You will be asked to enter the chromosome the desired SNP is on
+ - You will be asked to enter the chromosome the desired SNP is on or enter 0 to return to the main menu
  - If you enter a value that is not the number 0-23 or the letters M, X or Y, you will be notified your input is invalid and will be asked to press enter before entering a valid input
  - If you enter 0 you will returned to the main menu
  - Then you will be asked to enter the position of the SNP on that chromosome. The position is the location of that SNP in base pairs.
  - If you enter 0 you will be returned to main menu
+ - If the output database ```ePygenetics.csv``` does not exist then it will be created at this point
  - If you enter a SNP that is already in the database, you will be asked how you would like to proceed (see below)
  - At this point the programme will add a row to the database for that SNP
  - The programme will then take the user parameters and use them to search for that SNP in all the files that have been loaded into the database
@@ -84,5 +86,29 @@ You will then be asked to choose which of the 4 options you would like to do.
 ###Exit:
  - The programme will close
 
-##Running the tests
+###Output:
+ - Once you are finished, all the data you have added can be visualised in the output database ```ePygenetics.csv``` which can be found in the same directory as the script. This file can be opened in almost any text editor but is best visualised in Google Docs, Libre or Open Office Calc or Microsoft Excel. 
+
+##Testing the programme
+1. Download ```test-data``` and transfer the contents to the same directory as the main script
+2. Download the ```test-ePygenetics``` folder and move the entire folder to the same directory as the main script
+3. In the main script, delete the last line ```main()``` and save the file
+4. To install pytest, open the command line in the directory containing the main script and run the command ```pip install -U pytest```
+5. To check this worked correctly type the command ```python -m pytest --version``` and it should return a message similar to this ```This is pytest version 2.9.2, imported from /home/admin736/anaconda3/lib/python3.5/site-packages/pytest.py```
+6. Once this is complete, type the command ```python -m pytest```
+7. This will collect all the tests in the ```test-ePygenetics``` folder and run them
+8. The output should be similar to this:
+```============================= test session starts ==============================
+platform linux -- Python 3.5.2, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
+rootdir: /home/admin736/Desktop/Assignments/CallumChalmers29-crispy-disco, inifile: 
+collected 18 items 
+
+test-ePygenetics/test_ePygenetics.py ..................
+
+========================== 18 passed in 0.03 seconds ===========================```
+9. This confirms the programme is working correctly, if you do not get this screen, delete and redownload the contents of the GitHub repo and try again
+10. Once this is complete, in the main script add the last line ```main()``` back in and save the file
+
+
+
 

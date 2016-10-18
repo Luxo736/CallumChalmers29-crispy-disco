@@ -160,10 +160,13 @@ def generate_cell_line_file_list(cell_line_list):#makes sure the cell line files
         end_of_cell_line = element.find("-") #finds the dash in the file
         cell_line = element[:end_of_cell_line] #slices till the dash which is the cell line name
         order = cell_line_list.index(cell_line) if cell_line in cell_line_list else None#uses cell line name to determine if cell line is loaded in the database
+        print(cell_line, order)
         if order == None: #If the cell line is not loaded in the database
             pass #do nothing
         elif order > len(sorted_cell_line_file_list): #If the cell line is in a column greater than the length of the list
             sorted_cell_line_file_list.append(element) #Add it to the list
+        elif order == len(sorted_cell_line_file_list): #If cell line is in a column equal to the length of the list
+            sorted_cell_line_file_list.insert(order-1, element) #Add it in the right position
         else: #If the cell line is in a column less than the length of the list
             sorted_cell_line_file_list.insert(order, element) #Add it in the right position
     return sorted_cell_line_file_list #return ordered file list
@@ -378,5 +381,4 @@ def main(): #initialises programme
     welcome_to_ePygenetics()
     get_user_input_welcome()
 
-main()
 
