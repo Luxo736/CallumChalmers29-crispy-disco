@@ -1,3 +1,7 @@
+This file describes the licensing of the different components of this repository.
+
+Any code and associated documentation in this repository is under the MIT license:
+
 The MIT License (MIT)
 
 Copyright (c) 2016 Callum Chalmers
@@ -10,12 +14,16 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 The above text was sourced from opensource.org/licenses/MIT
 
-For more information on the MIT license see [this link](https://tldrlegal.com/license/mit-license)
+For more information on the MIT license see this <a href="https://tldrlegal.com/license/mit-license">link</a>
 
-Data in the test-data folder was obtained from an [open access repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) and is past its embargo data so can be reused without restriction. 
+Data in the test-data folder was originally obtained from an open access repository found <a href="https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50">here</a>
 
-For more information on CC-0 see [this link](https://creativecommons.org/publicdomain/zero/1.0/)
+It is under their data access policy found <a href="https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies">here</a>
 
-All other files are under the Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0). Under the terms of this license you are free to copy and redistribute the material in any medium of format and build on the material for any purpose even commerical but you must give appropriate credit, provide a link to the license and indicate what changes were made, you cannot in any way suggest that the licensor endorses you or your use. If you do adapt the code you must distribute it under the same license.
+For testing purposes, new data files were created containing the first 1000 lines of the original data. 
 
-For more information on CC BY-SA 4.0 see [this link](https://creativecommons.org/licenses/by-sa/4.0/)
+All other files are under the Attribution-ShareAlike 4.0 International license (CC BY-SA 4.0). 
+
+Under the terms of this license you are free to copy and redistribute the material in any medium of format and build on the material for any purpose even commerical but you must give appropriate credit, provide a link to the license and indicate what changes were made, you cannot in any way suggest that the licensor endorses you or your use. If you do adapt the material you must distribute it under the same license.
+
+For more information on CC BY-SA 4.0 see this <a href="https://creativecommons.org/licenses/by-sa/4.0/">link</a>
