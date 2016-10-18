@@ -1,8 +1,4 @@
-This file describes the licensing of the different components of this repository.
-
-Any code and associated documentation in this repository is under the MIT license:
-
-"The MIT License (MIT)
+The MIT License (MIT)
 
 Copyright (c) 2016 Callum Chalmers
 
