@@ -48,10 +48,10 @@ All code and associated documentation in this repository is under the MIT licens
 
 You will be greeted with a menu with 4 options: 
 
-1. Add a cell line (loading a file)
-2. Add a SNP
-3. Help
-4. Exit
+```1. Add a cell line (loading a file)```
+```2. Add a SNP```
+```3. Help```
+```4. Exit```
 
 Start by typing ```1``` and pressing enter
 
