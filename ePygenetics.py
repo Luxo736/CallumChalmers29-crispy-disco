@@ -86,11 +86,14 @@ def get_snp(): #function which gets the SNP data from the user and returns a tup
     print() #blank line for aesthetics
     chromosome = input("Enter chromosome number: ") #gets user input
     chromosome = chromosome.strip() #cleans user input
+    if chromosome.isalpha(): #if user enters a letter
+       chromosome = chromosome.upper() #make sure it is capital
     if chromosome == "0": #allows user to return if they got here by accident
         return_to_menu()
-    chromosome = check_user_input(["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","M", "Y"], chromosome) #ensures chromosome entry is valid
+    expected_inputs = ["1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","X","M", "Y"] 
+    chromosome = check_user_input(expected_inputs, chromosome) #ensures chromosome entry is valid
     if chromosome == 0: #if user entry is invalid
-        input(Fore.RED + "Invalid chromosome entered, only numbers 1-23 are valid, press enter to continue: ") #makes sure user enters a valid chromosome, message in red
+        input(Fore.RED + "Invalid chromosome entered, only numbers 1-23 and characters X, Y and M are valid, press enter to continue: ") #makes sure user enters a valid chromosome, message in red
         print(Style.RESET_ALL) #resets to white
         add_a_snp() #asks user again
     snp = input("Enter SNP position: ") #gets user input for SNP position
@@ -160,15 +163,15 @@ def generate_cell_line_file_list(cell_line_list):#makes sure the cell line files
         end_of_cell_line = element.find("-") #finds the dash in the file
         cell_line = element[:end_of_cell_line] #slices till the dash which is the cell line name
         order = cell_line_list.index(cell_line) if cell_line in cell_line_list else None#uses cell line name to determine if cell line is loaded in the database
-        print(cell_line, order)
         if order == None: #If the cell line is not loaded in the database
             pass #do nothing
-        elif order > len(sorted_cell_line_file_list): #If the cell line is in a column greater than the length of the list
-            sorted_cell_line_file_list.append(element) #Add it to the list
-        elif order == len(sorted_cell_line_file_list): #If cell line is in a column equal to the length of the list
-            sorted_cell_line_file_list.insert(order-1, element) #Add it in the right position
-        else: #If the cell line is in a column less than the length of the list
-            sorted_cell_line_file_list.insert(order, element) #Add it in the right position
+        else: #If the cell line is loaded
+           sorted_cell_line_file_list += [[order, element]] #create a new list with the correct order as a tuple
+    sorted_cell_line_file_list.sort() #sort into the correct order
+    for num in range(0,len(sorted_cell_line_file_list)): #for all the cell lines
+        element = sorted_cell_line_file_list[num]
+        element = element[1] #remove the order from the tuple
+        sorted_cell_line_file_list[num] = element #reset the list to just the file names in order
     return sorted_cell_line_file_list #return ordered file list
 
 def append_snp(chromosome, snp, file): #adds the snp data to the database
@@ -176,12 +179,15 @@ def append_snp(chromosome, snp, file): #adds the snp data to the database
     input_database = open("ePygenetics.csv", "r") #opens database
     data = input_database.read() #reads database
     data = data.split('\n') #splits into lines
-    for element in data:
-        data += '\n'#restores new lines
-    end = element.find("\n") #for last element
-    element = element[:end] #remove new line character
-    element += (contigs + ',') #appends snp data to line
-    database.close() #closes database
+    for num in range(len(data)): #for lines in database
+        if data[num] == "": #if empty
+            data.pop(num) #remove line
+    for num in range(len(data)):
+        if num < (len(data) - 1): #for all but the last element
+            data[num] += '\n'#restores new lines
+        else: #for the last element
+            data[num] += (contigs + ',' + '\n') #appends snp data to line
+    input_database.close() #closes database
     output_database = open("ePygenetics.csv", "w") #reopens database for writing
     output_database.writelines(data) #writes changes to database
     output_database.close() #closes database
@@ -380,5 +386,7 @@ def run_help():
 def main(): #initialises programme
     welcome_to_ePygenetics()
     get_user_input_welcome()
+
+main()
 
 
