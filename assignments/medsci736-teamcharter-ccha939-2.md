@@ -2,16 +2,16 @@
 
 ##Project Vision
 
-Help geneticists further understand the relationship between genes and phenotype by creating a python module 
-for analysing genomic data
+Help geneticists further understand the relationship between genes and phenotype by creating a python module for analysing genomic data
 
 ##Project Mission
 
-Create a python database that integrates DNAse hypersensitivity data with SNP data to allow for higher power integrative analysis of differences between cell fates and how these impact on cell phenotype
+Create a python database that integrates DNAse hypersensitivity data (represents gene expression) with SNP data (represents genetic variation) to allow for higher power integrative analysis of differences between cell fates and how these impact on cell phenotype
 
 ##Success Criteria
 
-- Submit a working programme by 18 October 2016
+- Submit a working programme by 27 October 2016 with associated documentation
+- Submit a software paper in the format of the Journal for Open Research Software by 27 October 2016
 - Create a valuable genetic analytic tool
 
 ##Behaviour Agreement

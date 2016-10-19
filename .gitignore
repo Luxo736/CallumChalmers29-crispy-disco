@@ -1,0 +1,3 @@
+/__pycache__/*.pyc
+ePygenetics.csv
+/test-ePygenetics/__pycache__/*.pyc
