@@ -91,15 +91,17 @@ Once this is complete exit the programme by typing ```3``` and pressing enter
 
 To check you have the correct output, go to the file containing the ```ePygenetics.py``` script and open the output database ```ePygenetics.csv```
 
-The file should look like this:
+If you open the file with a text editor it should look like this:
 
-snps	        CD34+	IMR90	FetalLung	FetalHeart	FetalAdrenal	FetalKidney
-chr10-58247*	42	NaN	NaN		NaN		NaN		NaN
-chr10-86145*	1	2	0		0		67		0
-chr10-63726*	NaN	NaN	2		32		2		1
-chr10-51102*	NaN	0	0		NaN		NaN		21
-chr10-92003*	NaN	NaN	84		0		0		NaN
-chr10-61994*	NaN	59	NaN		NaN		NaN		NaN
+```snps,CD34+,IMR90,FetalLung,FetalHeart,FetalAdrenal,FetalKidney```
+```chr10-58247*,42,NaN,NaN,NaN,NaN,NaN,```
+```chr10-86145*,1,2,0,0,67,0,```
+```chr10-63726*,NaN,NaN,2,32,2,1,```
+```chr10-51102*,NaN,0,0,NaN,NaN,21,```
+```chr10-92003*,NaN,NaN,84,0,0,NaN,```
+```chr10-61994*,NaN,59,NaN,NaN,NaN,NaN,```
+
+If you open the file with a Spreadsheet application, a matching sample output can be found in the ```test-data``` folder called ```ePygenetics-sample-output.csv```
 
 
 ###Running the programme using your own data
