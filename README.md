@@ -21,7 +21,7 @@ The programme was designed using data from the [NIH Roadmap Epigenomics Reposito
 
 ##Licensing
 
-All code and associated documentation in this repository is under the MIT license. Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under CC-BY-SA 4.0 International. For more information see the LICENSE file.
+All code and associated documentation in this repository is under the MIT license. Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under CC-BY-SA 4.0 International. For more information see the [LICENSE file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/LICENSE.txt).
 
 ##Prerequisites
 1. Python
