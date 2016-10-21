@@ -28,17 +28,17 @@ Test data files were created which contain the first 1000 lines of the original 
 
 ##Original File Download links:
 
- - CD34+ = [GSM530658_UW.CD34.rep1.ChromatinAccessibility.CD34+-DS12771.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530658/suppl/GSM530658_UW.CD34.ChromatinAccessibility.CD34+-DS12771.wig.gz)
+ - CD34+ = [GSM530658_UW.CD34.rep1.ChromatinAccessibility.CD34+-DS12771.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530658/suppl/GSM530658_UW.CD34.ChromatinAccessibility.CD34+-DS12771.wig.gz/)
 
- - FetalAdrenal = [GSM530653_UW.FetalAdrenalGland.ChromatinAccessibility.fAdrenal-DS12528.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530653/suppl/GSM530653_UW.FetalAdrenalGland.ChromatinAccessibility.fAdrenal-DS12528.wig.gz)
+ - FetalAdrenal = [GSM530653_UW.FetalAdrenalGland.ChromatinAccessibility.fAdrenal-DS12528.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530653/suppl/GSM530653_UW.FetalAdrenalGland.ChromatinAccessibility.fAdrenal-DS12528.wig.gz/)
 
- - FetalHeart = [GSM530654_UW.FetalHeart.ChromatinAccessibility.fHeart-DS12531.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530654/suppl/GSM530654_UW.FetalHeart.ChromatinAccessibility.fHeart-DS12531.wig.gz)
+ - FetalHeart = [GSM530654_UW.FetalHeart.ChromatinAccessibility.fHeart-DS12531.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530654/suppl/GSM530654_UW.FetalHeart.ChromatinAccessibility.fHeart-DS12531.wig.gz/)
 
- - FetalKidney = [GSM530655_UW.FetalKidney.ChromatinAccessibility.fKidney-DS12635.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530655/suppl/GSM530655_UW.FetalKidney.ChromatinAccessibility.fKidney-DS12635.wig.gz)
+ - FetalKidney = [GSM530655_UW.FetalKidney.ChromatinAccessibility.fKidney-DS12635.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530655/suppl/GSM530655_UW.FetalKidney.ChromatinAccessibility.fKidney-DS12635.wig.gz/)
 
- - FetalLung = [GSM530656_UW.FetalLung.ChromatinAccessibility.fLung-DS12646.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530656/suppl/GSM530656_UW.FetalLung.ChromatinAccessibility.fLung-DS12646.wig.gz)
+ - FetalLung = [GSM530656_UW.FetalLung.ChromatinAccessibility.fLung-DS12646.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM530nnn/GSM530656/suppl/GSM530656_UW.FetalLung.ChromatinAccessibility.fLung-DS12646.wig.gz/)
 
- - IMR90 = [GSM468801_UW.IMR90.rep2.ChromatinAccessibility.IMR90-DS11764.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM468nnn/GSM468801/suppl/GSM468801_UW.IMR90.rep2.ChromatinAccessibility.IMR90-DS11764.wig.gz)
+ - IMR90 = [GSM468801_UW.IMR90.rep2.ChromatinAccessibility.IMR90-DS11764.wig](ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM468nnn/GSM468801/suppl/GSM468801_UW.IMR90.rep2.ChromatinAccessibility.IMR90-DS11764.wig.gz/)
 
 ##Original File Metadata:
 
