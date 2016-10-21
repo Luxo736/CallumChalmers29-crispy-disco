@@ -10,7 +10,7 @@ The project was designed by Dr Justin O'Sullivan from the Liggins Institute who 
 
 In simple terms, this programme allows scientists to get extra information about person to person genetic variation. This information can then be used to better understand how genetics is related to disease and to look for treatments for diseases with a genetic component.
 
-The programme was designed using data from the [NIH Roadmap Epigenomics Repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) which is open access. A subset of 5 modified files has been included in the ```test-data``` folder for testing the programme.
+The programme was designed using data from the [NIH Roadmap Epigenomics Repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) which is open access. A subset of 6 modified files has been included in the ```test-data``` folder for testing the programme. For more information see the [data readme file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/test-data/README-data.md)
 
 ##Contributors
 
@@ -21,7 +21,7 @@ The programme was designed using data from the [NIH Roadmap Epigenomics Reposito
 
 ##Licensing
 
-All code and associated documentation in this repository is under the MIT license. Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under CC-BY-SA 4.0 International. For more information see the [LICENSE file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/LICENSE.txt).
+All code and associated documentation in this repository is under the MIT license. Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) and is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under CC-BY-SA 4.0 International. For more information see the [LICENSE file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/LICENSE.txt).
 
 ##Prerequisites
 1. Python
@@ -31,10 +31,10 @@ All code and associated documentation in this repository is under the MIT licens
 
 2. Operating System
  - The programme was scripted for Ubuntu 16.04 LTS, it is yet to be tested for compatibility issues with other operating systems
- - If you are using the file on Windows, on line 13 of ePygenetics.py you will need to change the code to read os.system('cls')
+ - If you are using the file on Windows, on line 13 of ```ePygenetics.py``` you will need to change the code to read ```os.system('cls')``` 
 
 ##Input Data Requirements
- - The programme can only read Wiggle (.wig) files with a fixed step of 20, see [this link](https://genome.ucsc.edu/goldenpath/help/wiggle.html) for more information about this file type
+ - The programme can only read Wiggle (.wig) files with a fixed step of 20, this is a standard file format for genetic data with a very specific structure, see [this link](https://genome.ucsc.edu/goldenpath/help/wiggle.html) for more information about this file type
  - **For the programme to read the files, both the script and the files need to be in the same directory**
  - **At least one .wig file is needed to run the programme**
  - Files must contain a "-" in their name to be read by the programme, whatever text is before the dash will be the column heading in the output database so bear this in mind when naming files
@@ -80,13 +80,13 @@ All code and associated documentation in this repository is under the MIT licens
 
  - If you enter something incorrectly, red text saying ```Cell line file not in folder``` will appear, press enter to continue and re-enter the cell line correctly
 
- - If you enter one that you have already entered, red text saying ```Cell line already entered``` will appear, enter ```1``` to continue and re-enter a different cell line
+ - If you enter a cell line that you have already entered, red text saying ```Cell line already entered``` will appear, enter ```1``` to continue and re-enter a different cell line
 
 9. Once this is complete and you have added all the cell lines, type ```2``` and press enter to return to the main menu
 
 ###Adding SNPs
 
-10. Type ```2``` and press enter
+10. On the main menu, type ```2``` and press enter
 
  - You will be transferred to the Add a SNP function and a message will appear saying ```Enter the chromosome and position of the SNP you wish to add or enter 0 to return to the main menu```
 
@@ -177,7 +177,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
 ###Adding a SNP
  - A message will pop up saying ```Enter the chromosome and position of the SNP you wish to add or enter 0 to return to the main menu```
  - Type the chromosome your SNP is on and press enter
- - If you enter a value that is not the number 0-23 or the letters M, X or Y, an error message will pop up saying ```Illegal character entered``` and you will be asked to press enter before entering a valid input
+ - If you enter a value that is not the numbers 0-23 or the letters m/M, x/X or y/Y, an error message will pop up saying ```Illegal character entered``` and you will be asked to press enter and will need to re-enter a valid input
  - If you enter ```0``` you will returned to the main menu
  - Then you will be asked to enter the position of the SNP on that chromosome. The position is the location of that SNP in base pairs.
  - Type the SNP position and press enter
@@ -185,7 +185,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - If the output database ```ePygenetics.csv``` does not exist then it will be created at this point
  - If you enter a SNP that is already in the database, an error message will appear saying ```SNP already entered```, see below for how to proceed
  - At this point the programme will add a row to the database for that SNP
- - The programme will then take the user parameters and use them to search for that SNP in all the files that have been loaded into the database
+ - The programme will then take the user parameters and use them to search for that SNP in all the files that have been loaded into the database using the Add a cell line function
  - If no files have been loaded, it will simply notify you that your SNP has been added and ask how you want to proceed (see below)
  - The programme will then return the number of contigs that aligned to the section of the genome that covers that SNP for each file. If the region of the genome that contains your SNP is not in the file, the programme will return NaN.
  - The programme will then populate the row of the database using the values it extracted from each file
