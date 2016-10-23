@@ -24,14 +24,23 @@ The programme was designed using data from the [NIH Roadmap Epigenomics Reposito
 All code and associated documentation in this repository is under the MIT license. Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) and is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under CC-BY-SA 4.0 International. For more information see the [LICENSE file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/LICENSE.txt).
 
 ##Prerequisites
-1. Python
+1. Operating System
+ - The programme was scripted for Ubuntu 16.04 LTS, it has been tested and is also compatible with macOS Sierra 10.12 and Windows 10 Home
+ - If you are using the file on Windows, on line 13 of ```ePygenetics.py``` you will need to change the code to read ```os.system('cls')``` for the programme to clear the screen
+2. Python
   - To run the software you will need Python 3.5.2 or a compatible version
   - Follow [this link](https://www.python.org/downloads/release/python-352/) to download Python 3.5.2 
   - Alternatively under the CC BY-SA 4.0 license you can update the code to be compatible with your own version of python 
+3. Python Packages
+ - The software requires the Python package Colorama version 0.3.7 or a compatible versio
+ - To install this package:
+  - On Windows, open the command line and run the command ```py -m pip install colorama==0.3.7```
+  - On Linux, open the command line and run the command ```pip install colorama==0.3.7```
+  - On OS X, open the command line and run the command ```pip3 install colorama==0.3.7```
+  - If you already have colorama installed and the version is incompatible add the optional ```-I``` argument to ignore previous versions
+ - For testing, the software requires the Python package pytest version 2.9.2 or a compatible version, see "Testing the programme" for instructions on how to run this
 
-2. Operating System
- - The programme was scripted for Ubuntu 16.04 LTS, it is yet to be tested for compatibility issues with other operating systems
- - If you are using the file on Windows, on line 13 of ```ePygenetics.py``` you will need to change the code to read ```os.system('cls')``` 
+
 
 ##Input Data Requirements
  - The programme can only read Wiggle (.wig) files with a fixed step of 20, this is a standard file format for genetic data with a very specific structure, see [this link](https://genome.ucsc.edu/goldenpath/help/wiggle.html) for more information about this file type
@@ -40,7 +49,7 @@ All code and associated documentation in this repository is under the MIT licens
  - Files must contain a "-" in their name to be read by the programme, whatever text is before the dash will be the column heading in the output database so bear this in mind when naming files
 
 ##Limitations
- - The last 1000 base pairs of each chromosome cannot be read due to a change in the file structure at this point, any SNP in this range will be treated as if it is not in the file and return NaN
+ - The last block of base pairs of each chromosome (the remainder when the length is divided by 1000) cannot be read due to a change in the file structure at this point, any SNP in this range will be treated as if it is not in the file and return NaN
  - For the output to be valid, all files must use the same genome build, see [this link](https://genome.ucsc.edu/FAQ/FAQreleases.html) for more information about genome releases
 
 ## Running the programme using the test data
@@ -163,6 +172,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - If the output database ```ePygenetics.csv``` does not exist, it will be created as part of this process
  - For this action to work the corresponding file must be in the same directory as the ```ePygenetics.py``` script
  - The file must be named ```[cell line]-[any text].wig```
+ - Once a file is added, **it must stay in the folder** for the programme to run correctly, if the file is removed, the output will be invalid
  - Type the cell line name and press enter
  - If you enter a valid cell line, the programme will add a column to the database and search the file for any SNPs that have been entered into the file
  - If you enter a cell line that does not have a corresponding file in the directory an error message will pop up saying ```Cell line file not in folder```, to clear move the file into the directory and then press enter
@@ -207,20 +217,34 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - Once you are finished, all the data you have added can be visualised in the output database ```ePygenetics.csv``` which can be found in the same directory as the ```ePygenetics.py``` script.
  - This file can be opened in almost any text editor but is best visualised in Google Docs, Libre or Open Office Calc or Microsoft Excel. 
  - The output database should have all the added cell lines as column headings and all the added SNPs as row headings. All the cells within these columns and rows should be filled with data values or NaN
+ - Changing this database in any way could alter the way the programme runs so if you want to manipulate it, copy it to a different directory or copy it and rename it
 
 ##Testing the programme
+ - This software comes with a set of unit tests to check the programme is functioning correctly
+ - These were designed using pytest version 2.9.2
+ - To run the tests, follow these steps:
 1. Download ```test-data``` and transfer the contents to the same directory as the ```ePygenetics.py``` script
 2. Download the ```test-ePygenetics``` folder and move the entire folder to the same directory as the ```ePygenetics.py``` script
 3. In the ```ePygenetics.py``` script, delete the last line ```main()``` and save the file
-4. To install pytest, open the command line in the directory containing the ```ePygenetics.py``` script and run the command ```pip install -U pytest```
-5. To check this worked correctly type the command ```python -m pytest --version``` and it should return a message similar to this, depending on your version and directory pathway:
-
+4. To install pytest version 2.9.2, open the command line in the directory containing the ```ePygenetics.py``` script:
+ - On Windows, run the command ```py -m pip install pytest==2.9.2```
+ - On Linux, run the command ```pip install pytest==2.9.2```
+ - On OS X, run the command ```pip3 install pytest==2.9.2```
+ - If you already have pytest installed, and the version is incompatible, include the optional ```-I``` argument to ignore previous versions
+5. To check this worked correctly:
+ - On Windows, type the command ```py -m pytest --version```
+ - On Linux, type the command ```python -m pytest --version```
+ - On OS X, type the command ```python3 -m pytest --version``` 
+ - This should return a message similar to this, depending on your version, operating system and directory pathway:
 	```
 	This is pytest version 2.9.2, imported from /home/admin736/anaconda3/lib/python3.5/site-packages/pytest.py
 	```
-6. Once this is complete, type the command ```python -m pytest```
+6. Once this is complete:
+ - On Windows, run the command ```py -m pytest -pyargs test-ePygenetics/test-ePygenetics.py```
+ - On Linux, run the command ```python -m pytest```
+ - On OS X, run the command ```python3 -m pytest```
 7. This will collect all the tests in the ```test-ePygenetics``` folder and run them
-8. The output should be similar to this, depending on your Python and pytest versions and your rootdir, the most important thing is there are **18 tests** and they all pass:
+8. The output should be similar to this, depending on your Python and pytest versions, your operation system and your rootdir, the most important thing is there are **18 tests** and they all pass:
 
 	```
 	============================= test session starts ==============================
@@ -233,7 +257,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
 	========================== 18 passed in 0.03 seconds ===========================
 	```
 
-9. This confirms the programme is working correctly, if you do not get this screen, delete and redownload the contents of the GitHub repo and try again
+9. This confirms the programme is working correctly, if you do not get this screen, delete and redownload the contents of the GitHub repo, check all your package versions and try again 
 10. Once this is complete, in the ```ePygenetics.py``` script add the last line ```main()``` back in and save the file to run the programme properly
 
 
