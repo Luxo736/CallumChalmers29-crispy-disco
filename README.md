@@ -26,7 +26,7 @@ All code and associated documentation in this repository is under the [MIT licen
 ##Prerequisites
 1. Operating System
  - The programme was scripted for Ubuntu 16.04 LTS, it has been tested and is also compatible with macOS Sierra 10.12 and Windows 10 Home
- - If you are using the file on Windows, on line 13 of ```ePygenetics.py``` you will need to change the code to read ```os.system('cls')``` for the programme to clear the screen
+ - If you are using the script on Windows, on line 13 of ```ePygenetics.py``` you will need to change the code to read ```os.system('cls')``` for the programme to clear the screen
 2. Python
 	- To run the software you will need Python 3.5.2 or a compatible version
 	- Follow [this link](https://www.python.org/downloads/release/python-352/) to download Python 3.5.2 
@@ -117,7 +117,7 @@ All code and associated documentation in this repository is under the [MIT licen
 	chromosome = 10 SNP = 61994
 	```
 
- - If you enter one that you have already entered, red text saying ```SNP already entered``` will appear, enter ```1``` to continue and re-enter a different SNP
+ - If you enter a SNP that you have already entered, red text saying ```SNP already entered``` will appear, enter ```1``` to continue and re-enter a different SNP
 
 15. Once this is complete exit the programme by typing ```3``` and pressing enter
 
@@ -170,6 +170,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - If the output database ```ePygenetics.csv``` does not exist, it will be created as part of this process
  - For this action to work the corresponding file must be in the same directory as the ```ePygenetics.py``` script
  - The file must be named ```[cell line]-[any text].wig```
+ - The text before the dash in the file name must be unique for the programme to function correctly, for example if you have two files from the same cell line call them "Epithelial1-xxx" and "Epithelial2-xxx"
  - Once a file is added, **it must stay in the folder** for the programme to run correctly, if the file is removed, the output will be invalid
  - Type the cell line name and press enter
  - If you enter a valid cell line, the programme will add a column to the database and search the file for any SNPs that have been entered into the file
@@ -192,6 +193,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - If you enter ```0``` you will be returned to main menu
  - If the output database ```ePygenetics.csv``` does not exist then it will be created at this point
  - If you enter a SNP that is already in the database, an error message will appear saying ```SNP already entered```, see below for how to proceed
+ - If you enter a SNP by accident, the only way to remove it is to wait until the programme is finished and then to delete the entire from the output database
  - At this point the programme will add a row to the database for that SNP
  - The programme will then take the user parameters and use them to search for that SNP in all the files that have been loaded into the database using the Add a cell line function
  - If no files have been loaded, it will simply notify you that your SNP has been added and ask how you want to proceed (see below)
