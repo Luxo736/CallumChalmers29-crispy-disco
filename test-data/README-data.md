@@ -1,6 +1,6 @@
 ##ePygenetics Test Data
 
-This is the test data set for the programme ePygenetics. Instructions on how to run the tests and how to run the programme using this data can be found in the [main README file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/README.md).
+This is the test data set for the programme ePygenetics. Instructions on how to run the tests and how to run the programme using this dataset can be found in the [main README file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/README.md).
 
 ## Licensing
 
@@ -8,7 +8,7 @@ Data is under the NIH Epigenomics [data access policy](https://www.drugabuse.gov
 
 ##Test Data Metadata
 
-Original files downloaded from [ http://nihroadmap.nih.gov/epigenomics/]( http://nihroadmap.nih.gov/epigenomics/).
+Original files downloaded from [http://nihroadmap.nih.gov/epigenomics/](http://nihroadmap.nih.gov/epigenomics/).
 
 Date accessed: 21/08/2016
 
