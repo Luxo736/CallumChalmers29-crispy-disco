@@ -10,7 +10,7 @@ The project was designed by Dr Justin O'Sullivan from the Liggins Institute who 
 
 In simple terms, this programme allows scientists to get extra information about person to person genetic variation. This information can then be used to better understand how genetics is related to disease and to look for treatments for diseases with a genetic component.
 
-The programme was designed using data from the [NIH Roadmap Epigenomics Repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) which is open access. A subset of 5 modified files has been included in the ```test-data``` folder for testing the programme.
+The programme was designed using data from the [NIH Roadmap Epigenomics Repository](https://www.ncbi.nlm.nih.gov/geo/roadmap/epigenomics/?search=DNAse+hypersensitivity&display=50) which is open access. A subset of 6 modified files has been included in the ```test-data``` folder for testing the programme. For more information see the [data readme file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/test-data/README-data.md)
 
 ##Contributors
 
@@ -21,26 +21,33 @@ The programme was designed using data from the [NIH Roadmap Epigenomics Reposito
 
 ##Licensing
 
-All code and associated documentation in this repository is under the MIT license. Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under CC-BY-SA 4.0 International. For more information see the LICENSE file.
+All code and associated documentation in this repository is under the [MIT license](https://tldrlegal.com/license/mit-license). Data in the ```test-data file``` was downloaded from [here](http://nihroadmap.nih.gov/epigenomics/) and is covered by the [NIH Epigenomic Data Policy](https://www.drugabuse.gov/funding/funding-opportunities/nih-common-fund/epigenomics-data-access-policies). All other files are licensed under [CC-BY-SA 4.0 International](https://creativecommons.org/licenses/by-sa/4.0/). For more information see the [LICENSE file](https://github.com/UOA-MEDSCI-736/CallumChalmers29-crispy-disco/blob/master/LICENSE.txt).
 
 ##Prerequisites
-1. Python
-  - To run the software you will need Python 3.5.2 or a compatible version
-  - Follow [this link](https://www.python.org/downloads/release/python-352/) to download Python 3.5.2 
-  - Alternatively under the CC BY-SA 4.0 license you can update the code to be compatible with your own version of python 
-
-2. Operating System
- - The programme was scripted for Ubuntu 16.04 LTS, it is yet to be tested for compatibility issues with other operating systems
- - If you are using the file on Windows, on line 13 of ePygenetics.py you will need to change the code to read os.system('cls')
+1. Operating System
+ - The programme was scripted for Ubuntu 16.04 LTS, it has been tested and is also compatible with macOS Sierra 10.12 and Windows 10 Home
+ - If you are using the script on Windows, on line 13 of ```ePygenetics.py``` you will need to change the code to read ```os.system('cls')``` for the programme to clear the screen
+2. Python
+	- To run the software you will need Python 3.5.2 or a compatible version
+	- Follow [this link](https://www.python.org/downloads/release/python-352/) to download Python 3.5.2 
+	- Alternatively under the MIT license you can update the code to be compatible with your own version of Python 
+3. Python Packages
+	- The software requires the Python package Colorama version 0.3.7 or a compatible version
+	- To install this package:
+		- On Windows, open the command line and run the command ```py -m pip install colorama==0.3.7```
+		- On Linux, open the command line and run the command ```pip install colorama==0.3.7```
+		- On OS X, open the command line and run the command ```pip3 install colorama==0.3.7```
+		- If you already have colorama installed and the version is incompatible add the optional ```-I``` argument to ignore previous versions
+	- For testing, the software requires the Python package pytest version 2.9.2 or a compatible version, see "Testing the programme" for instructions on how to run this
 
 ##Input Data Requirements
- - The programme can only read Wiggle (.wig) files with a fixed step of 20, see [this link](https://genome.ucsc.edu/goldenpath/help/wiggle.html) for more information about this file type
+ - The programme can only read Wiggle (.wig) files with a fixed step of 20, this is a standard file format for genetic data with a very specific structure, see [this link](https://genome.ucsc.edu/goldenpath/help/wiggle.html) for more information about this file type
  - **For the programme to read the files, both the script and the files need to be in the same directory**
  - **At least one .wig file is needed to run the programme**
  - Files must contain a "-" in their name to be read by the programme, whatever text is before the dash will be the column heading in the output database so bear this in mind when naming files
 
 ##Limitations
- - The last 1000 base pairs of each chromosome cannot be read due to a change in the file structure at this point, any SNP in this range will be treated as if it is not in the file and return NaN
+ - The last block of base pairs of each chromosome (the remainder when the chromosome length is divided by 1000) cannot be read due to a change in the file structure at this point, any SNP in this range will be treated as if it is not in the file and return NaN
  - For the output to be valid, all files must use the same genome build, see [this link](https://genome.ucsc.edu/FAQ/FAQreleases.html) for more information about genome releases
 
 ## Running the programme using the test data
@@ -80,13 +87,13 @@ All code and associated documentation in this repository is under the MIT licens
 
  - If you enter something incorrectly, red text saying ```Cell line file not in folder``` will appear, press enter to continue and re-enter the cell line correctly
 
- - If you enter one that you have already entered, red text saying ```Cell line already entered``` will appear, enter ```1``` to continue and re-enter a different cell line
+ - If you enter a cell line that you have already entered, red text saying ```Cell line already entered``` will appear, enter ```1``` to continue and re-enter a different cell line
 
 9. Once this is complete and you have added all the cell lines, type ```2``` and press enter to return to the main menu
 
 ###Adding SNPs
 
-10. Type ```2``` and press enter
+10. On the main menu, type ```2``` and press enter
 
  - You will be transferred to the Add a SNP function and a message will appear saying ```Enter the chromosome and position of the SNP you wish to add or enter 0 to return to the main menu```
 
@@ -110,7 +117,7 @@ All code and associated documentation in this repository is under the MIT licens
 	chromosome = 10 SNP = 61994
 	```
 
- - If you enter one that you have already entered, red text saying ```SNP already entered``` will appear, enter ```1``` to continue and re-enter a different SNP
+ - If you enter a SNP that you have already entered, red text saying ```SNP already entered``` will appear, enter ```1``` to continue and re-enter a different SNP
 
 15. Once this is complete exit the programme by typing ```3``` and pressing enter
 
@@ -163,6 +170,8 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - If the output database ```ePygenetics.csv``` does not exist, it will be created as part of this process
  - For this action to work the corresponding file must be in the same directory as the ```ePygenetics.py``` script
  - The file must be named ```[cell line]-[any text].wig```
+ - The text before the dash in the file name must be unique for the programme to function correctly, for example if you have two files from the same cell line call them "Epithelial1-xxx" and "Epithelial2-xxx"
+ - Once a file is added, **it must stay in the folder** for the programme to run correctly, if the file is removed, the output will be invalid
  - Type the cell line name and press enter
  - If you enter a valid cell line, the programme will add a column to the database and search the file for any SNPs that have been entered into the file
  - If you enter a cell line that does not have a corresponding file in the directory an error message will pop up saying ```Cell line file not in folder```, to clear move the file into the directory and then press enter
@@ -177,15 +186,16 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
 ###Adding a SNP
  - A message will pop up saying ```Enter the chromosome and position of the SNP you wish to add or enter 0 to return to the main menu```
  - Type the chromosome your SNP is on and press enter
- - If you enter a value that is not the number 0-23 or the letters M, X or Y, an error message will pop up saying ```Illegal character entered``` and you will be asked to press enter before entering a valid input
+ - If you enter a value that is not the numbers 0-23 or the letters m/M, x/X or y/Y, an error message will pop up saying ```Illegal character entered``` and you will be asked to press enter and will need to re-enter a valid input
  - If you enter ```0``` you will returned to the main menu
  - Then you will be asked to enter the position of the SNP on that chromosome. The position is the location of that SNP in base pairs.
  - Type the SNP position and press enter
  - If you enter ```0``` you will be returned to main menu
  - If the output database ```ePygenetics.csv``` does not exist then it will be created at this point
  - If you enter a SNP that is already in the database, an error message will appear saying ```SNP already entered```, see below for how to proceed
+ - If you enter a SNP by accident, the only way to remove it is to wait until the programme is finished and then to delete the entire from the output database
  - At this point the programme will add a row to the database for that SNP
- - The programme will then take the user parameters and use them to search for that SNP in all the files that have been loaded into the database
+ - The programme will then take the user parameters and use them to search for that SNP in all the files that have been loaded into the database using the Add a cell line function
  - If no files have been loaded, it will simply notify you that your SNP has been added and ask how you want to proceed (see below)
  - The programme will then return the number of contigs that aligned to the section of the genome that covers that SNP for each file. If the region of the genome that contains your SNP is not in the file, the programme will return NaN.
  - The programme will then populate the row of the database using the values it extracted from each file
@@ -207,34 +217,48 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - Once you are finished, all the data you have added can be visualised in the output database ```ePygenetics.csv``` which can be found in the same directory as the ```ePygenetics.py``` script.
  - This file can be opened in almost any text editor but is best visualised in Google Docs, Libre or Open Office Calc or Microsoft Excel. 
  - The output database should have all the added cell lines as column headings and all the added SNPs as row headings. All the cells within these columns and rows should be filled with data values or NaN
+ - Changing this database in any way could alter the way the programme runs so if you want to manipulate it, copy it to a different directory or copy it and rename it
 
 ##Testing the programme
-1. Download ```test-data``` and transfer the contents to the same directory as the ```ePygenetics.py``` script
-2. Download the ```test-ePygenetics``` folder and move the entire folder to the same directory as the ```ePygenetics.py``` script
-3. In the ```ePygenetics.py``` script, delete the last line ```main()``` and save the file
-4. To install pytest, open the command line in the directory containing the ```ePygenetics.py``` script and run the command ```pip install -U pytest```
-5. To check this worked correctly type the command ```python -m pytest --version``` and it should return a message similar to this, depending on your version and directory pathway:
+ - This software comes with a set of unit tests to check the programme is functioning correctly
+ - These were designed using pytest version 2.9.2
+ - To run the tests, follow these steps:
+	1. Download ```test-data``` and transfer the contents to the same directory as the ```ePygenetics.py``` script
+	2. Download the ```test_ePygenetics``` folder and move the entire folder to the same directory as the ```ePygenetics.py``` script
+	3. In the ```ePygenetics.py``` script, delete the last line ```main()``` and save the file
+	4. To install pytest version 2.9.2, open the command line in the directory containing the ```ePygenetics.py``` script:
+		- On Windows, run the command ```py -m pip install pytest==2.9.2```
+		- On Linux, run the command ```pip install pytest==2.9.2```
+		- On OS X, run the command ```pip3 install pytest==2.9.2```
+		- If you already have pytest installed, and the version is incompatible, include the optional ```-I``` argument to ignore previous versions
+	5. To check this worked correctly:
+		- On Windows, type the command ```py -m pytest --version```
+		- On Linux, type the command ```python -m pytest --version```
+		- On OS X, type the command ```python3 -m pytest --version``` 
+		- This should return a message similar to this, depending on your version, operating system and directory pathway:
+		```
+		This is pytest version 2.9.2, imported from /home/admin736/anaconda3/lib/python3.5/site-packages/pytest.py
+		```
+	6. Once this is complete:
+		- On Windows, run the command ```py -m pytest -pyargs test-ePygenetics/test_ePygenetics.py```
+		- On Linux, run the command ```python -m pytest```
+		- On OS X, run the command ```python3 -m pytest```
+	7. This will collect all the tests in the ```test_ePygenetics``` folder and run them
+	8. The output should be similar to this, depending on your Python and pytest versions, your operation system and your rootdir, the most important thing is there are **16 tests** and they all pass:
 
-	```
-	This is pytest version 2.9.2, imported from /home/admin736/anaconda3/lib/python3.5/site-packages/pytest.py
-	```
-6. Once this is complete, type the command ```python -m pytest```
-7. This will collect all the tests in the ```test-ePygenetics``` folder and run them
-8. The output should be similar to this, depending on your Python and pytest versions and your rootdir, the most important thing is there are **18 tests** and they all pass:
+		```
+		============================= test session starts ==============================
+		platform linux -- Python 3.5.2, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
+		rootdir: /home/admin736/Desktop/Assignments/CallumChalmers29-crispy-disco, inifile: 
+		collected 16 items 
+	
+		test-ePygenetics/test_ePygenetics.py ..................
+	
+		========================== 16 passed in 0.03 seconds ===========================
+		```
 
-	```
-	============================= test session starts ==============================
-	platform linux -- Python 3.5.2, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
-	rootdir: /home/admin736/Desktop/Assignments/CallumChalmers29-crispy-disco, inifile: 
-	collected 18 items 
-
-	test-ePygenetics/test_ePygenetics.py ..................
-
-	========================== 18 passed in 0.03 seconds ===========================
-	```
-
-9. This confirms the programme is working correctly, if you do not get this screen, delete and redownload the contents of the GitHub repo and try again
-10. Once this is complete, in the ```ePygenetics.py``` script add the last line ```main()``` back in and save the file to run the programme properly
+	9. This confirms the programme is working correctly, if you do not get this screen, delete and redownload the contents of the GitHub repo, check all your package versions and try again 
+	10. Once this is complete, in the ```ePygenetics.py``` script add the last line ```main()``` back in and save the file to run the programme properly
 
 
 
