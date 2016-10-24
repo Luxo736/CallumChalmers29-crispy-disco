@@ -222,7 +222,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - These were designed using pytest version 2.9.2
  - To run the tests, follow these steps:
 	1. Download ```test-data``` and transfer the contents to the same directory as the ```ePygenetics.py``` script
-	2. Download the ```test-ePygenetics``` folder and move the entire folder to the same directory as the ```ePygenetics.py``` script
+	2. Download the ```test_ePygenetics``` folder and move the entire folder to the same directory as the ```ePygenetics.py``` script
 	3. In the ```ePygenetics.py``` script, delete the last line ```main()``` and save the file
 	4. To install pytest version 2.9.2, open the command line in the directory containing the ```ePygenetics.py``` script:
 		- On Windows, run the command ```py -m pip install pytest==2.9.2```
@@ -238,21 +238,21 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
 		This is pytest version 2.9.2, imported from /home/admin736/anaconda3/lib/python3.5/site-packages/pytest.py
 		```
 	6. Once this is complete:
-		- On Windows, run the command ```py -m pytest -pyargs test-ePygenetics/test-ePygenetics.py```
+		- On Windows, run the command ```py -m pytest -pyargs test-ePygenetics/test_ePygenetics.py```
 		- On Linux, run the command ```python -m pytest```
 		- On OS X, run the command ```python3 -m pytest```
-	7. This will collect all the tests in the ```test-ePygenetics``` folder and run them
-	8. The output should be similar to this, depending on your Python and pytest versions, your operation system and your rootdir, the most important thing is there are **18 tests** and they all pass:
+	7. This will collect all the tests in the ```test_ePygenetics``` folder and run them
+	8. The output should be similar to this, depending on your Python and pytest versions, your operation system and your rootdir, the most important thing is there are **16 tests** and they all pass:
 
 		```
 		============================= test session starts ==============================
 		platform linux -- Python 3.5.2, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
 		rootdir: /home/admin736/Desktop/Assignments/CallumChalmers29-crispy-disco, inifile: 
-		collected 18 items 
+		collected 16 items 
 	
 		test-ePygenetics/test_ePygenetics.py ..................
 	
-		========================== 18 passed in 0.03 seconds ===========================
+		========================== 16 passed in 0.03 seconds ===========================
 		```
 
 	9. This confirms the programme is working correctly, if you do not get this screen, delete and redownload the contents of the GitHub repo, check all your package versions and try again 
