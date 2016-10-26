@@ -170,7 +170,7 @@ You will then be asked to choose which of the 4 options you would like to do. Ty
  - If the output database ```ePygenetics.csv``` does not exist, it will be created as part of this process
  - For this action to work the corresponding file must be in the same directory as the ```ePygenetics.py``` script
  - The file must be named ```[cell line]-[any text].wig```
- - The text before the dash in the file name must be unique for the programme to function correctly, for example if you have two files from the same cell line call them "Epithelial1-xxx" and "Epithelial2-xxx"
+ - The text before the dash in the file name must be unique for the programme to function correctly, for example if you have two files from the same cell line call them ```Epithelial1-xxx.wig``` and ```Epithelial2-xxx.wig```
  - Once a file is added, **it must stay in the folder** for the programme to run correctly, if the file is removed, the output will be invalid
  - Type the cell line name and press enter
  - If you enter a valid cell line, the programme will add a column to the database and search the file for any SNPs that have been entered into the file
